@@ -1,0 +1,21 @@
+@import '../utilities/variables';
+
+.traqHome {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--foreground);
+  background: var(--background);
+
+  h1 {
+    font-size: 3rem;
+    color: var(--primary);
+    background-color: var(--accent);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+} 
