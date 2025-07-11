@@ -1,16 +1,19 @@
-import "./globals.scss";
+ import "./globals.scss";
+  import ClientProvider from './client-provider';
 
-export const metadata = {
-  title: "Traq",
-  description: "Minimal Traq app",
-};
+  export const metadata = {
+    title: "Traq",
+    description: "Minimal Traq app",
+  };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
-  );
-}
+  export default function RootLayout({ children }) {
+    return (
+      <html lang="en">
+        <body>
+          <ClientProvider>
+            {children}
+          </ClientProvider>
+        </body>
+      </html>
+    );
+  }
