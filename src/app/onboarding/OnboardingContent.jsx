@@ -1,19 +1,28 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './index.module.scss';
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 console.log('Onboarding page loaded');
 
 export default function OnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { status } = useSession();
+  const [awaitingSession, setAwaitingSession] = useState(false);
   const email = searchParams.get('email') || '';
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (awaitingSession && status === 'authenticated') {
+      router.push('/dashboard');
+    }
+  }, [awaitingSession, status, router]);
 
   async function handleSubmit(e) {
     if (e) e.preventDefault();
@@ -44,7 +53,7 @@ export default function OnboardingContent() {
       });
       console.log('signIn result:', result);
       if (result?.ok) {
-        router.push('/dashboard');
+        setAwaitingSession(true);
       } else if (result?.error) {
         setError(result.error);
       }
