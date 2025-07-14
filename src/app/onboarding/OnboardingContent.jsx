@@ -53,7 +53,7 @@ export default function OnboardingContent() {
       });
       console.log('signIn result:', result);
       if (result?.ok) {
-        setAwaitingSession(true);
+        window.location.href = result.url;
       } else if (result?.error) {
         setError(result.error);
       }

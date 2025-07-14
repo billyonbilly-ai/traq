@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVerificationCode, deleteVerificationCode } from "@/lib/verification-codes";
-import { getUserByEmail } from "@/lib/user-utils";
+import { getUserByEmail, hasGoogleAccount } from "@/lib/user-utils";
 
 export async function POST(req) {
   const { email, code } = await req.json();
@@ -14,9 +14,13 @@ export async function POST(req) {
 
   const user = await getUserByEmail(email);
 
-  if (user && user.password) {
-    return NextResponse.json({ status: "signin" });
-  } else if (user) {
+  if (user) {
+    if (await hasGoogleAccount(user._id)) {
+      return NextResponse.json({ status: "google" });
+    }
+    if (user.password) {
+      return NextResponse.json({ status: "signin" });
+    }
     return NextResponse.json({ status: "onboarding" });
   } else {
     return NextResponse.json({ status: "onboarding" });

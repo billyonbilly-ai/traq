@@ -33,4 +33,14 @@ export async function updateUser(userId, update) {
     { _id: typeof userId === 'string' ? new ObjectId(userId) : userId },
     { $set: update }
   );
+}
+
+export async function hasGoogleAccount(userId) {
+  await client.connect();
+  const db = client.db();
+  const account = await db.collection("accounts").findOne({
+    userId: typeof userId === 'string' ? new ObjectId(userId) : userId,
+    provider: "google",
+  });
+  return !!account;
 } 
