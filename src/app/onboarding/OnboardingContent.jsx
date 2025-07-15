@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './index.module.scss';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import EyeIcon from '../../components/EyeIcon';
+import Button from '../../components/Button';
 
 console.log('Onboarding page loaded');
 
@@ -17,6 +19,7 @@ export default function OnboardingContent() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (awaitingSession && status === 'authenticated') {
@@ -66,33 +69,48 @@ export default function OnboardingContent() {
   return (
     <div className={styles.onboardingPage}>
       <div className={styles.onboardingBox}>
-        <h2>Set up your account</h2>
+        <div className={styles.divider}><span>Set up your account</span></div>
+        <div className={styles.dividerSub}><span>Set a Display Name and Password</span></div>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            className={styles.onboardingInput}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Create a password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className={styles.onboardingInput}
-            required
-          />
-          <button
-            className={styles.onboardingButton}
-            type="submit"
-            disabled={loading || !name || !password}
-          >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+            <label htmlFor="name" style={{ fontWeight: 500, marginBottom: 0 }}>Display Name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Your name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className={styles.onboardingInput}
+              required
+              autoComplete="name"
+            />
+            <label htmlFor="password" style={{ fontWeight: 500, marginBottom: 0, marginTop: '1.5rem' }}>Password</label>
+            <div
+              className={styles.passwordInputWrap}
+              tabIndex={-1}
+              style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'var(--background)', borderRadius: 8 }}
+            >
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Create a password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className={styles.passwordInput}
+                required
+                autoComplete="new-password"
+                style={{ border: 'none', outline: 'none', boxShadow: 'none', background: 'transparent', flex: 1, paddingRight: 40 }}
+              />
+              <span style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', zIndex: 2 }} onClick={() => setShowPassword(v => !v)}>
+                <EyeIcon open={!showPassword} />
+              </span>
+            </div>
+          </div>
+          <Button type="submit" loading={loading} disabled={!name || !password}>
             Continue
-          </button>
+          </Button>
         </form>
-        {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+        {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>
   );

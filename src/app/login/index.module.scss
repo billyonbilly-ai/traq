@@ -1,39 +1,117 @@
 .loginPage {
   min-height: 100vh;
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background);
-  color: var(--foreground);
 }
 
 .loginBox {
+  background: var(--background);
+  border-radius: 20px;
+box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  min-width: 320px;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  align-items: stretch;
+  gap: 1.5rem;
 }
 
-.loginButton {
-  background: var(--foreground);
-  color: var(--background);
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #2626261a;
+  margin: 0 0.75rem;
 }
 
 .emailSection {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
+
+  label {
+    color: var(--foreground);
+    font-size: 1rem;
+  }
 }
 
-.emailInput {
-  padding: 0.75rem;
-  border-radius: 4px;
-  border: 1px solid var(--foreground);
+.emailInput, .passwordInput {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid #2626261a;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.emailInput:focus, .passwordInput:focus {
+  border: 1px solid #2626263a;
+}
+
+.emailSection .codeLabel, .emailSection .passwordLabel {
+  margin-top: 1.5rem;
+}
+
+.error {
+  color: #ff4d4f;
+  margin-top: 0.5rem;
+  font-size: 0.98rem;
+}
+
+// Password input wrapper for unified border and focus
+.passwordInputWrap {
+  border: 1px solid #2626261a;
+  border-radius: 8px;
+  background: var(--background);
+  transition: border 0.2s;
+}
+.passwordInputWrap.active,
+.passwordInputWrap:focus-within {
+  border: 1px solid #2626263a;
+}
+@media (prefers-color-scheme: dark) {
+  .divider::before, .divider::after {
+    border-bottom: 1px solid #dedddd1a;
+  }
+  .emailInput, .passwordInput {
+    border: 1px solid #dedddd1a;
+  }
+  .emailInput:focus, .passwordInput:focus {
+  border: 1px solid #dedddd56;
+}
+  .passwordInputWrap {
+    border: 1px solid #dedddd1a;
+  }
+  .passwordInputWrap.active,
+  .passwordInputWrap:focus-within {
+    border: 1px solid #dedddd56;
+  }
+}
+
+@media (max-width: 600px) {
+  .loginPage {
+    padding: 1.5rem;
+  }
+  .loginBox {
+    padding: 1.5rem 2.5rem;
+  }
 }

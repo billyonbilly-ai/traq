@@ -1,34 +1,107 @@
 .onboardingPage {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--background);
-  color: var(--foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .onboardingBox {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  min-width: 320px;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  align-items: stretch;
+}
+
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--foreground);
+  font-size: 1.4rem;
+  font-weight: 600;
+margin-bottom: 0.6rem;
+
+span {
+  line-height: 1;
+}
+}
+
+.dividerSub {
+  margin-bottom: 4rem;
+  font-size: 1.3rem;
+  color: #262626a5;
+  font-weight: 600;
+  text-align: center;
+
+  span {
+  line-height: 1;
+}
+}
+
+@media (prefers-color-scheme: dark) {
+  .dividerSub {
+    color: #faf9f599;
+  }
+}
+
+
+.onboardingInput, .passwordInput {
   background: var(--background);
+  color: var(--foreground);
+  border: 1px solid #2626261a;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.onboardingInput:focus, .passwordInput:focus {
+  border: 1px solid #2626263a;
 }
 
-.onboardingInput {
-  padding: 0.75rem;
-  border-radius: 4px;
-  border: 1px solid var(--foreground);
+@media (prefers-color-scheme: dark) {
+  .onboardingInput, .passwordInput {
+    border: 1px solid #dedddd1a;
+  }
+  .onboardingInput:focus, .passwordInput:focus {
+    border: 1px solid #dedddd56;
+  }
 }
 
-.onboardingButton {
-  background: var(--foreground);
-  color: var(--background);
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.error {
+  color: #ff4d4f;
+  margin-top: 0.5rem;
+  font-size: 0.98rem;
+}
+
+
+.passwordInputWrap {
+  border: 1px solid #2626261a;
+  border-radius: 8px;
+  background: var(--background);
+  transition: border 0.2s;
+  margin-bottom: 1rem;
+}
+.passwordInputWrap.active,
+.passwordInputWrap:focus-within {
+  border: 1px solid #2626263a;
+}
+@media (prefers-color-scheme: dark) {
+  .passwordInputWrap {
+    border: 1px solid #dedddd1a;
+  }
+  .passwordInputWrap.active,
+  .passwordInputWrap:focus-within {
+    border: 1px solid #dedddd56;
+  }
+}
+
+@media (max-width: 600px) {
+  .onboardingPage {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

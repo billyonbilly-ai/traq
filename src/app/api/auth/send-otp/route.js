@@ -19,12 +19,8 @@ export async function POST(req) {
       <div style="font-family: 'Inter', Arial, sans-serif; background: #faf9f5; padding: 32px; border-radius: 12px; max-width: 420px; margin: 0 auto; color: #141413;">
         <h2 style="color: #FC5130; margin-bottom: 16px;">Sign in to Traq</h2>
         <p style="font-size: 1.1rem; margin-bottom: 24px;">Your verification code is:</p>
-        <div style="font-size: 2rem; font-weight: bold; letter-spacing: 2px; background: #f0eee6; padding: 12px 0; border-radius: 8px; text-align: center; margin-bottom: 24px;">${code}</div>
-        <p style="margin-bottom: 16px;">Or sign in instantly with the magic link below:</p>
-        <div style="text-align: center; margin-bottom: 24px;">
-          <a href="${magicLink}" style="display: inline-block; background: #FC5130; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-weight: 600; font-size: 1.1rem;">Sign in to Traq</a>
-        </div>
-        <p style="font-size: 0.95rem; color: #555; margin-top: 32px;">This code and link will expire in 10 minutes.<br>If you did not request this, you can safely ignore this email.</p>
+        <div style="font-size: 2rem; font-weight: bold; letter-spacing: 2px; background: #f0eee6; padding: 12px 0; border-radius: 8px; text-align: center; margin-bottom: 24px;">${code}</div> 
+        <p style="font-size: 0.95rem; color: #555; margin-top: 32px;">This code will expire in 10 minutes.<br>If you did not request this, you can safely ignore this email.</p>
       </div>
     `,
   });

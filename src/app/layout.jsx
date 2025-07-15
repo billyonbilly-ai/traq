@@ -1,5 +1,5 @@
  import "./globals.scss";
-  import ClientProvider from './client-provider';
+  import ClientProvider from './context/ClientProvider';
 
   export const metadata = {
     title: "Traq",
