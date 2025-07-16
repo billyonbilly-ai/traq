@@ -4,28 +4,26 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './index.module.scss';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
-import EyeIcon from '../../components/EyeIcon';
 import Button from '../../components/Button';
-
-console.log('Onboarding page loaded');
+import PasswordInput from '../../components/PasswordInput';
+import FormError from '../../components/FormError';
+import { setPassword as setUserPassword } from '../../lib/auth';
 
 export default function OnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { status } = useSession();
-  const [awaitingSession, setAwaitingSession] = useState(false);
   const email = searchParams.get('email') || '';
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (awaitingSession && status === 'authenticated') {
+    if (status === 'authenticated') {
       router.push('/dashboard');
     }
-  }, [awaitingSession, status, router]);
+  }, [status, router]);
 
   async function handleSubmit(e) {
     if (e) e.preventDefault();
@@ -33,12 +31,7 @@ export default function OnboardingContent() {
     setLoading(true);
     setError('');
     console.log('Submitting onboarding form...');
-    const res = await fetch('/api/auth/set-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, name, password }),
-    });
-    const data = await res.json();
+    const data = await setUserPassword(email, name, password);
     console.log('set-password response:', data);
     if (data.success) {
       console.log('Attempting credentials signIn...');
@@ -72,8 +65,8 @@ export default function OnboardingContent() {
         <div className={styles.divider}><span>Set up your account</span></div>
         <div className={styles.dividerSub}><span>Set a Display Name and Password</span></div>
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-            <label htmlFor="name" style={{ fontWeight: 500, marginBottom: 0 }}>Display Name</label>
+          <div className={styles.formFields}>
+            <label htmlFor="name" className={styles.onboardingLabel}>Display Name</label>
             <input
               id="name"
               type="text"
@@ -84,33 +77,20 @@ export default function OnboardingContent() {
               required
               autoComplete="name"
             />
-            <label htmlFor="password" style={{ fontWeight: 500, marginBottom: 0, marginTop: '1.5rem' }}>Password</label>
-            <div
-              className={styles.passwordInputWrap}
-              tabIndex={-1}
-              style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'var(--background)', borderRadius: 8 }}
-            >
-              <input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Create a password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                className={styles.passwordInput}
-                required
-                autoComplete="new-password"
-                style={{ border: 'none', outline: 'none', boxShadow: 'none', background: 'transparent', flex: 1, paddingRight: 40 }}
-              />
-              <span style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', zIndex: 2 }} onClick={() => setShowPassword(v => !v)}>
-                <EyeIcon open={!showPassword} />
-              </span>
-            </div>
+            <label htmlFor="password" className={styles.onboardingPasswordLabel}>Password</label>
+            <PasswordInput
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required={true}
+              id="password"
+              autoComplete="new-password"
+            />
           </div>
           <Button type="submit" loading={loading} disabled={!name || !password}>
             Continue
           </Button>
         </form>
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <FormError message={error} />}
       </div>
     </div>
   );

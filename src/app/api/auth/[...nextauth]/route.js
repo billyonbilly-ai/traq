@@ -65,9 +65,6 @@ const handler = NextAuth({
       if (user && user.id) session.user.id = user.id;
       return session;
     },
-    // async redirect({ url, baseUrl }) {
-    //   return '/dashboard';
-    // },
   },
 });
 

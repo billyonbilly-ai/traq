@@ -9,7 +9,7 @@ export default function Home() {
       <div>
         <h1>Traq</h1>
         <button
-          style={{ marginTop: '2rem', padding: '0.5rem 1.5rem', background: 'var(--foreground)', color: 'var(--background)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+          className={styles.loginButton}
           onClick={() => router.push('/login')}
         >
           Log in

@@ -1,0 +1,46 @@
+.passwordInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--background);
+  border-radius: 8px;
+  border: 1px solid #2626261a;
+  transition: border 0.2s;
+  margin-bottom: 1rem;
+}
+
+.passwordInputWrap.active,
+.passwordInputWrap:focus-within {
+  border: 1px solid #2626263a;
+}
+
+.passwordInput {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  flex: 1;
+  padding: 0.9rem 1rem;
+  padding-right: 40px;
+  color: var(--foreground);
+  font-size: 1rem;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+  .passwordInputWrap {
+    border: 1px solid #dedddd1a;
+  }
+  .passwordInputWrap.active,
+  .passwordInputWrap:focus-within {
+    border: 1px solid #dedddd56;
+  }
+} 

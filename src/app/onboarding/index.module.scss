@@ -79,9 +79,12 @@ span {
 
 
 .passwordInputWrap {
-  border: 1px solid #2626261a;
-  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
   background: var(--background);
+  border-radius: 8px;
+  border: 1px solid #2626261a;
   transition: border 0.2s;
   margin-bottom: 1rem;
 }
@@ -99,9 +102,46 @@ span {
   }
 }
 
+.onboardingLabel {
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.onboardingPasswordLabel {
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+}
+
+.passwordInput {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  flex: 1;
+  padding-right: 40px;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
 @media (max-width: 600px) {
   .onboardingPage {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
