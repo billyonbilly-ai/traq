@@ -79,12 +79,12 @@ export default function OnboardingContent() {
             />
             <label htmlFor="password" className={styles.onboardingPasswordLabel}>Password</label>
             <PasswordInput
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               required={true}
               id="password"
-              autoComplete="new-password"
-            />
+                autoComplete="new-password"
+              />
           </div>
           <Button type="submit" loading={loading} disabled={!name || !password}>
             Continue
