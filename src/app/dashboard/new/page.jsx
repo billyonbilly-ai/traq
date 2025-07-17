@@ -84,7 +84,7 @@ export default function DashboardNew() {
               <div className={styles.timezoneBox}>
                 <span className={styles.timezoneDisplay}>{formatTimezone(timezone)} <span className={styles.timezoneHelper}>current time is {currentTime}</span></span>
               </div>
-              <div className={styles.subText}>This controls what “today” refers to in your analytics.</div>
+              <div className={styles.subText}>Daily analytics are shown in this timezone.</div>
               <button className={styles.addBtn} type="submit">Add URL</button>
             </form>
           ) : (
