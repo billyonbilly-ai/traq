@@ -2,6 +2,7 @@
 import styles from './page.module.scss';
 import { useSession} from 'next-auth/react';
 import Button from '../../components/Button';
+import DashboardNavbar from '../../components/DashboardNavbar';
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
