@@ -93,7 +93,7 @@ export default function DashboardNew() {
             </div>
           )}
         </div>
-        <div className={styles.helpText}>Need help? Email <a href="mailto:marc@datafa.st">billy@traq.site</a></div>
+        <div className={styles.helpText}>Got questions? Email <a href="mailto:billy@traq.site">billy@traq.site</a></div>
       </div>
     </div>
   );
