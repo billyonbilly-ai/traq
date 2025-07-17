@@ -10,7 +10,7 @@ export default function GoogleButton({ onClick, loading, disabled }) {
       disabled={disabled}
     >
       <span className={styles.logoWrap}>
-        <Image src="/google.png" alt="Google" width={22} height={22} />
+        <Image src="/google.png" alt="Google" width={21} height={21} />
       </span>
       <span className={styles.text}>{'Sign up with Google'}</span>
     </button>

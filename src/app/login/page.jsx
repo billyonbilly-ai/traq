@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import styles from './index.module.scss';
+import styles from './page.module.scss';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -141,47 +141,47 @@ export default function Login() {
   return (
     <>
       <Toast message={toastMessage} visible={toastVisible} onClose={() => setToastVisible(false)} />
-      <div className={styles.loginPage}>
-        <div className={styles.loginBox}>
-          <div className={styles.logo}>Traq.</div>
-          <GoogleButton onClick={handleGoogleSignIn} loading={googleLoading} disabled={isAnyLoading} />
-          <div className={styles.divider}><span>or</span></div>
-          <div className={styles.emailSection}>
+    <div className={styles.loginPage}>
+      <div className={styles.loginBox}>
+        <div className={styles.logo}>Traq.</div>
+        <GoogleButton onClick={handleGoogleSignIn} loading={googleLoading} disabled={isAnyLoading} />
+        <div className={styles.divider}><span>or</span></div>
+        <div className={styles.emailSection}>
             <label htmlFor="email" className={styles.label}>Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className={styles.emailInput}
-              disabled={step !== 'email' || isAnyLoading}
-              autoComplete="email"
-            />
-            {step === 'email' && (
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className={styles.emailInput}
+            disabled={step !== 'email' || isAnyLoading}
+            autoComplete="email"
+          />
+          {step === 'email' && (
               <form onSubmit={(e) => { e.preventDefault(); handleEmailContinue(); }} className={styles.formFields}>
                 <Button type="submit" loading={isAnyLoading}>
-                  Sign up with email
-                </Button>
+              Sign up with email
+            </Button>
               </form>
-            )}
-            {step === 'code' && (
-              <>
+          )}
+          {step === 'code' && (
+            <>
                 <label htmlFor="code" className={styles.codeLabel}>Verification code</label>
                 <form onSubmit={(e) => { e.preventDefault(); handleCodeContinue(); }} className={styles.form}>
-                  <input
-                    type="text"
-                    placeholder="Enter verification code"
-                    value={code}
-                    onChange={e => setCode(e.target.value)}
-                    className={styles.emailInput}
-                    disabled={isAnyLoading}
-                    autoComplete="one-time-code"
-                  />
+              <input
+                type="text"
+                placeholder="Enter verification code"
+                value={code}
+                onChange={e => setCode(e.target.value)}
+                className={styles.emailInput}
+                disabled={isAnyLoading}
+                autoComplete="one-time-code"
+              />
                   {error && <FormError message={error} />}
                   <Button type="submit" loading={isAnyLoading}>
-                    Continue
-                  </Button>
+                Continue
+              </Button>
                 </form>
                 <div className={styles.resendContainer}>
                   <span
@@ -194,32 +194,32 @@ export default function Login() {
                     {resendCountdown > 0 ? `Resend in ${resendCountdown}s` : 'Resend Code'}
                   </span>
                 </div>
-              </>
-            )}
-            {step === 'password' && (
-              <>
+            </>
+          )}
+          {step === 'password' && (
+            <>
                 <label htmlFor="password" className={styles.passwordLabel}>Password</label>
                 <form onSubmit={(e) => { e.preventDefault(); handlePasswordContinue(); }}>
                   <PasswordInput
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    disabled={isAnyLoading}
-                    autoComplete="current-password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  disabled={isAnyLoading}
+                  autoComplete="current-password"
                     required={true}
                     id="password"
                   />
                   {error && <FormError message={error} />}
                   <Button type="submit" loading={isAnyLoading} disabled={!password}>
-                    Continue with password
-                  </Button>
+                Continue with password
+              </Button>
                 </form>
-              </>
-            )}
+            </>
+          )}
             {step !== 'code' && step !== 'password' && error && <FormError message={error} />}
           </div>
           <div className={styles.termsText}>
             By signing up, you agree to our <a href="#" className={styles.termsLink}>Terms of Service</a>.
-          </div>
+        </div>
         </div>
       </div>
     </>

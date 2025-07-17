@@ -4,55 +4,61 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2.4rem;
 }
 
 .loginBox {
   background: var(--background);
   border-radius: 20px;
-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
-  min-width: 350px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 3.2rem 6.4rem;
+  min-width: 35rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 1.5rem;
+  gap: 2.4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loginBox {
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .loginBox {
+    box-shadow: 0 1px 3px 0 rgba(255,255,255,0.06), 0 1px 2px -1px rgba(255,255,255,0.08);
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 3.2rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .label {
   color: var(--foreground);
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 500;
   margin-bottom: 0;
 }
 
-.codeLabel {
+.codeLabel, .passwordLabel {
   font-weight: 500;
   margin-bottom: 0;
-  margin-top: 1.5rem;
-}
-
-.passwordLabel {
-  font-weight: 500;
-  margin-bottom: 0;
-  margin-top: 1.5rem;
+  margin-top: 2.4rem;
 }
 
 .passwordInputWrap {
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--background);
+  border: 1px solid rgba(38,38,38,.1019607843);
   border-radius: 8px;
-  border: 1px solid #2626261a;
+  background: var(--background);
   transition: border 0.2s;
 }
 
@@ -60,14 +66,14 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
   border: none;
   outline: none;
   box-shadow: none;
-  background: transparent;
-  flex: 1;
-  padding-right: 40px;
+  background: rgba(0,0,0,0);
+  flex: 1 1;
+  padding-right: 4rem;
 }
 
 .eyeIcon {
   position: absolute;
-  right: 12px;
+  right: 1.2rem;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -79,24 +85,24 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
   align-items: center;
   text-align: center;
   color: #888;
-  font-size: 0.95rem;
-  margin: 0.8rem 0 0.8rem 0;
+  font-size: 1.52rem;
+  margin: 1.28rem 0;
 }
 .divider::before, .divider::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #2626261a;
-  margin: 0 0.75rem;
+  margin: 0 1.2rem;
 }
 
 .emailSection {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 1.12rem;
 
   label {
     color: var(--foreground);
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -105,8 +111,8 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
   color: var(--foreground);
   border: 1px solid #2626261a;
   border-radius: 8px;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
+  padding: 1.44rem 1.6rem;
+  font-size: 1.6rem;
   outline: none;
   transition: border 0.2s;
   width: 100%;
@@ -116,13 +122,13 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
 }
 
 .emailSection .codeLabel, .emailSection .passwordLabel {
-  margin-top: 1.5rem;
+  margin-top: 2.4rem;
 }
 
 .error {
   color: #ff4d4f;
-  margin-top: 0.5rem;
-  font-size: 0.98rem;
+  margin-top: 0.8rem;
+  font-size: 1.568rem;
 }
 
 // Password input wrapper for unified border and focus
@@ -144,8 +150,8 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
     border: 1px solid #dedddd1a;
   }
   .emailInput:focus, .passwordInput:focus {
-  border: 1px solid #dedddd56;
-}
+    border: 1px solid #dedddd56;
+  }
   .passwordInputWrap {
     border: 1px solid #dedddd1a;
   }
@@ -157,24 +163,25 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
 
 @media (max-width: 600px) {
   .loginPage {
-    padding: 1.5rem;
+    padding: 2.4rem;
   }
   .loginBox {
-    padding: 1.5rem 2.5rem;
+    padding: 2.4rem 4rem;
   }
 }
 
 .resendContainer {
-  margin-top: 0.7rem;
+  margin-top: 1.12rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.6rem;
 }
 
 .resendLink {
   color: var(--primary);
   font-weight: 600;
+  font-size: 1.4rem;
   cursor: pointer;
   opacity: 1;
   user-select: none;
@@ -183,7 +190,7 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
   width: 100%;
   text-align: center;
 }
-.resendLink[aria-disabled="true"] {
+.resendLink[aria-disabled=true] {
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
@@ -191,8 +198,8 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
 
 .termsText {
   color: #888;
-  font-size: 0.95rem;
-  margin-top: 1.5rem;
+  font-size: 1.52rem;
+  margin-top: 2.4rem;
   text-align: center;
 }
 
@@ -204,5 +211,5 @@ box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  padding: 2rem 4rem;
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 1.12rem;
 }

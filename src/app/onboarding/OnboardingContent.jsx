@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import styles from './index.module.scss';
+import styles from './page.module.scss';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';

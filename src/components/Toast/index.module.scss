@@ -1,29 +1,43 @@
 .toast {
   position: fixed;
-  top: 1.2rem;
+  top: 1.92rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--foreground);
   color: var(--background);
-  padding: 1rem 2rem;
+  padding: 1.6rem 3.2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  font-size: 0.93rem;
+  box-shadow: 0 0.32rem 1.92rem rgba(0,0,0,.1);
+  font-size: 1.488rem;
   font-weight: 500;
   z-index: 9999;
   animation: toast-in 0.3s cubic-bezier(.4,0,.2,1);
   width: max-content;
 }
 
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--primary);
+  transition: width 0.1s linear;
+}
+
 @media(max-width: 600px) {
-
   .toast {
-    padding :1rem;
-    top: 6.2rem;
-
+    padding: 1.6rem;
+    top: 9.92rem;
   }
 }
+
 @keyframes toast-in {
-  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 } 

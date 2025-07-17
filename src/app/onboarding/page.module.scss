@@ -13,32 +13,31 @@
   align-items: stretch;
 }
 
-
 .divider {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: var(--foreground);
-  font-size: 1.4rem;
+  font-size: 2.24rem;
   font-weight: 600;
-margin-bottom: 0.6rem;
+  margin-bottom: 0.96rem;
 
-span {
-  line-height: 1;
-}
+  span {
+    line-height: 1;
+  }
 }
 
 .dividerSub {
-  margin-bottom: 4rem;
-  font-size: 1.3rem;
+  margin-bottom: 6.4rem;
+  font-size: 2.08rem;
   color: #262626a5;
   font-weight: 600;
   text-align: center;
 
   span {
-  line-height: 1;
-}
+    line-height: 1;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,14 +46,13 @@ span {
   }
 }
 
-
 .onboardingInput, .passwordInput {
   background: var(--background);
   color: var(--foreground);
   border: 1px solid #2626261a;
   border-radius: 8px;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
+  padding: 1.44rem 1.6rem;
+  font-size: 1.6rem;
   outline: none;
   transition: border 0.2s;
 }
@@ -73,20 +71,16 @@ span {
 
 .error {
   color: #ff4d4f;
-  margin-top: 0.5rem;
-  font-size: 0.98rem;
+  margin-top: 0.8rem;
+  font-size: 1.568rem;
 }
 
-
 .passwordInputWrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: var(--background);
-  border-radius: 8px;
   border: 1px solid #2626261a;
+  border-radius: 8px;
+  background: var(--background);
   transition: border 0.2s;
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
 }
 .passwordInputWrap.active,
 .passwordInputWrap:focus-within {
@@ -104,7 +98,7 @@ span {
 
 .onboardingLabel {
   color: var(--foreground);
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 500;
   margin-bottom: 0;
 }
@@ -112,7 +106,7 @@ span {
 .onboardingPasswordLabel {
   font-weight: 500;
   margin-bottom: 0;
-  margin-top: 1.5rem;
+  margin-top: 2.4rem;
 }
 
 .passwordInput {
@@ -121,12 +115,14 @@ span {
   box-shadow: none;
   background: transparent;
   flex: 1;
-  padding-right: 40px;
+  padding-right: 64px;
+  color: var(--foreground);
+  font-size: 1.6rem;
 }
 
 .eyeIcon {
   position: absolute;
-  right: 12px;
+  right: 19.2px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -135,13 +131,11 @@ span {
 
 @media (max-width: 600px) {
   .onboardingPage {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
   }
 }
 
 .formFields {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  gap: 1.12rem;
 }
