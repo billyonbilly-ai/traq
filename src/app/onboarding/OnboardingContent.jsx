@@ -62,8 +62,8 @@ export default function OnboardingContent() {
   return (
     <div className={styles.onboardingPage}>
       <div className={styles.onboardingBox}>
-        <div className={styles.divider}><span>Set up your account</span></div>
-        <div className={styles.dividerSub}><span>Set a Display Name and Password</span></div>
+        <div className={styles.heading}><span>Set up your account</span></div>
+        <div className={styles.headingSub}><span>Set a Display Name and Password</span></div>
         <form onSubmit={handleSubmit}>
           <div className={styles.formFields}>
             <label htmlFor="name" className={styles.onboardingLabel}>Display Name</label>

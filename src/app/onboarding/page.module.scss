@@ -13,12 +13,12 @@
   align-items: stretch;
 }
 
-.divider {
+.heading {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--foreground);
+  color: var(--primary);
   font-size: 2.24rem;
   font-weight: 600;
   margin-bottom: 0.96rem;
@@ -28,10 +28,10 @@
   }
 }
 
-.dividerSub {
+.headingSub {
   margin-bottom: 6.4rem;
   font-size: 2.08rem;
-  color: #262626a5;
+  color: var(--foreground);
   font-weight: 600;
   text-align: center;
 
@@ -40,11 +40,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .dividerSub {
-    color: #faf9f599;
-  }
-}
+
 
 .onboardingInput, .passwordInput {
   background: var(--background);
@@ -104,6 +100,7 @@
 }
 
 .onboardingPasswordLabel {
+  font-size: 1.6rem;
   font-weight: 500;
   margin-bottom: 0;
   margin-top: 2.4rem;
@@ -138,4 +135,6 @@
 
 .formFields {
   gap: 1.12rem;
+  display: flex;
+  flex-direction: column;
 }

@@ -138,6 +138,11 @@ export default function Login() {
 
   const isAnyLoading = loading || googleLoading;
 
+  // Add email validation
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   return (
     <>
       <Toast message={toastMessage} visible={toastVisible} onClose={() => setToastVisible(false)} />
@@ -148,23 +153,31 @@ export default function Login() {
         <div className={styles.divider}><span>or</span></div>
         <div className={styles.emailSection}>
             <label htmlFor="email" className={styles.label}>Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className={styles.emailInput}
-            disabled={step !== 'email' || isAnyLoading}
-            autoComplete="email"
-          />
-          {step === 'email' && (
-              <form onSubmit={(e) => { e.preventDefault(); handleEmailContinue(); }} className={styles.formFields}>
-                <Button type="submit" loading={isAnyLoading}>
-              Sign up with email
-            </Button>
-              </form>
-          )}
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              if (!isValidEmail(email) || isAnyLoading) return;
+              handleEmailContinue();
+            }}
+            className={styles.formFields}
+            style={{ margin: 0 }}
+          >
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className={`${styles.emailInput} ${styles.emailInputEmail}`}
+              disabled={step !== 'email' || isAnyLoading}
+              autoComplete="email"
+            />
+            {step === 'email' && (
+              <Button type="submit" loading={isAnyLoading} disabled={!isValidEmail(email) || isAnyLoading}>
+                Sign up with email
+              </Button>
+            )}
+          </form>
           {step === 'code' && (
             <>
                 <label htmlFor="code" className={styles.codeLabel}>Verification code</label>

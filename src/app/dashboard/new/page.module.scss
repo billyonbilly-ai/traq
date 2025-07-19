@@ -88,7 +88,7 @@
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 50%;
-  background: rgba(168, 85, 247, 0.18);
+  background: #a855f72e;
   z-index: 0;
   transition: opacity 0.3s;
 }
@@ -111,6 +111,9 @@
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--foreground);
+}
+.active .stepLabel {
+  color: var(--primary);
 }
 
 
@@ -153,6 +156,7 @@
 .domainInputWrap {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: var(--background);
   border: 1px solid #2626261a;
   border-radius: 8px;
@@ -244,6 +248,85 @@
   margin-bottom: 1.2rem;
   min-height: 3.6rem;
 }
+
+.card2 {
+  min-height: 260px; 
+  display: flex; 
+  flex-direction: column;
+
+}
+.cardTitle2 {
+    margin-bottom: 2.8rem;
+  }
+
+  .linkBtns {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+
+    .copy, .edit {
+    border-radius: 6px;
+    font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.2s, border-color 0.2s;
+    }
+
+    .copy {
+      background-color: #a855f72e;
+      color: var(--primary);
+    border: 1px solid rgb(168, 85, 247, 0.09);
+  box-shadow: 0 1px 0px rgba(0,0,0,0.08);
+    }
+
+        .copy:hover {
+  border-color: rgb(168, 85, 247, 0.18);
+}
+
+  .edit {
+  background: #fff;
+  color: var(--foreground);
+  border: 1px solid rgba(0,0,0,0.09);
+  box-shadow: 0 1px 0px rgba(0,0,0,0.08);
+ 
+    }
+    .edit:hover {
+  border-color: rgba(0,0,0,0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  .edit {
+      border: 1px solid rgb(255, 255, 255, 0.11);
+    background: #232323;
+    color: var(--foreground);
+    box-shadow: 0 -1px 2px 0 rgba(40, 40, 40, .64) inset, 0 1px 1px 0 rgba(0, 0, 0, .06), 0 0 0 1px rgba(40, 40, 40, .06), 0 8px 16px -8px rgba(40, 40, 40, .318);
+  }
+  .edit:hover {
+    border-color: rgba(255,255,255,0.18);
+  }
+}
+  }
+  .subTextBold {
+    font-weight: 600;
+  }
+
+  .customLink {
+   border: none;
+  outline: none;
+  color: var(--foreground);
+  font-size: 1.6rem;
+  flex: 1;
+  padding: 0;
+  height: 100%;
+  background: transparent;
+    width: 100%;
+  }
+  
 @media (prefers-color-scheme: dark) {
   .dashboardBtn {
     background: #232323;
@@ -256,9 +339,7 @@
   .domainInputWrap:focus-within {
     border: 1px solid #dedddd56;
   }
-  .timezoneSelect:focus {
-    border: 1px solid var(--primary);
-  }
+
 }
 @media (max-width: 600px) {
   .addNewContainer {

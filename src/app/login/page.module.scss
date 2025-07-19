@@ -117,6 +117,12 @@
   transition: border 0.2s;
   width: 100%;
 }
+
+.emailInputEmail {
+  margin-bottom: 1rem;
+}
+
+
 .emailInput:focus, .passwordInput:focus {
   border: 1px solid #2626263a;
 }
