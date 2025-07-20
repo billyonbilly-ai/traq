@@ -315,17 +315,28 @@
     font-weight: 600;
   }
 
-  .customLink {
-   border: none;
+.customLink, .customLinkPrefix {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.4;
+  display: inline;
+  vertical-align: baseline;
+}
+.customLink {
+  border: none;
   outline: none;
-  color: var(--foreground);
-  font-size: 1.6rem;
+  color: var(--primary);
   flex: 1;
   padding: 0;
-  height: 100%;
+  height: auto;
   background: transparent;
-    width: 100%;
-  }
+  width: 100%;
+  box-sizing: content-box;
+}
+.customLinkPrefix {
+  /* match .customLink */
+}
   
 @media (prefers-color-scheme: dark) {
   .dashboardBtn {
@@ -369,4 +380,40 @@
 }
 .active .dotBg {
   animation: beepPulse 1.6s cubic-bezier(0.4,0,0.2,1) infinite;
+}
+
+.inactiveBtn {
+  opacity: 0.7;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+.inactiveCopyBtn {
+  color: #b0b0b0 !important;
+  background: #e5e5e5 !important;
+  border-color: #d1d5db !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  & svg {
+    fill: #b0b0b0 !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .inactiveCopyBtn {
+    color: #b0b0b0 !important;
+    background: #232323 !important;
+    border-color: #333 !important;
+    & svg {
+      fill: #b0b0b0 !important;
+    }
+  }
+}
+.edit.doneState {
+  background: var(--foreground);
+  border: 1px solid rgb(255, 255, 255, 0.11);
+}
+@media (prefers-color-scheme: dark) {
+  .edit.doneState {
+    background: var(--foreground);
+    border: 1px solid rgba(0,0,0,0.09);
+  }
 }
