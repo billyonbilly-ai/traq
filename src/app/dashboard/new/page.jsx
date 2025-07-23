@@ -170,9 +170,13 @@ export default function DashboardNew() {
           ) : (
             <div className={`${styles.card} ${styles.card2}`}>
               <div className={`${styles.cardTitle} ${styles.cardTitle2}`}>
-                Your custom link
+                Copy and share your custom link
                 </div>
-                <div className={styles.domainInputWrap}>
+                              <span className={styles.stepLabel}>Custom link</span>
+
+              {/* Custom link input and copy button, and edit button below */}
+              <>
+                <div className={`${styles.domainInputWrap} ${styles.customLinkWrap}`}>
                   <span className={styles.customLinkPrefix} style={{ color: editMode ? 'var(--foreground)' : 'var(--primary)', fontWeight: 500, userSelect: 'none' }}>{base}</span>
                   <input
                     ref={customLinkInputRef}
@@ -180,9 +184,11 @@ export default function DashboardNew() {
                     autoComplete="off"
                     value={customPath}
                     readOnly={!editMode}
+                    spellCheck={false}
                     style={{ color: editMode ? 'var(--foreground)' : 'var(--primary)', fontWeight: 500, background: 'transparent', border: 'none', outline: 'none', width: '100%' }}
-                    onChange={e => setCustomPath(e.target.value.replace(/\//g, ''))}
+                    onChange={e => setCustomPath(e.target.value.replace(/\//g, '').slice(0, 20))}
                   />
+                </div>
                 <div className={styles.linkBtns}>
                   <div className={styles.copy + ' ' + (editMode ? styles.inactiveCopyBtn : '')}
                     onClick={editMode ? undefined : async () => {
@@ -227,15 +233,19 @@ export default function DashboardNew() {
                     )}
                   </div>
                 </div>
-              </div>
-              <div className={styles.subText}>Redirects to <span className={styles.subTextBold}>{(() => {
+              </>
+              <label className={styles.inputLabel} htmlFor="timezone">Redirects to</label>
+              <div className={styles.timezoneBox}>
+              <span className={styles.subTextBold}>{(() => {
                 if (!url) return '';
                 let noProtocol = url.replace(/^https?:\/\//, '');
                 if (noProtocol.length > 27) {
                   return noProtocol.slice(0, 27) + '...';
                 }
                 return noProtocol;
-              })()}</span></div>
+              })()}</span>
+              </div>
+             
                <button className={styles.addBtn + ' ' + (editMode ? styles.inactiveBtn : '')} type="submit" disabled={editMode}>Start Tracking</button>
               </div>
           

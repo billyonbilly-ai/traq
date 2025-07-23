@@ -233,11 +233,7 @@
   color: var(--primary);
   text-decoration: underline;
 }
-.step2Text {
-  font-size: 2.2rem;
-  color: var(--foreground);
-  font-weight: 600;
-}
+
 .timezoneBox {
   display: flex;
   align-items: center;
@@ -250,23 +246,28 @@
 }
 
 .card2 {
-  min-height: 260px; 
+  // min-height: 260px; 
   display: flex; 
   flex-direction: column;
 
 }
-.cardTitle2 {
-    margin-bottom: 2.8rem;
+
+
+  .customLinkWrap {
+    padding: 0 0.3rem 0 0.6rem;
+    margin-bottom: 0.5rem;
   }
 
   .linkBtns {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    height: 100%;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 1rem;
 
     .copy, .edit {
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1.4rem;
   font-weight: 500;
   padding: 0.4rem 0.5rem;
@@ -289,7 +290,7 @@
 }
 
   .edit {
-  background: #fff;
+  background: var(--background);
   color: var(--foreground);
   border: 1px solid rgba(0,0,0,0.09);
   box-shadow: 0 1px 0px rgba(0,0,0,0.08);
@@ -317,8 +318,8 @@
 
 .customLink, .customLinkPrefix {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
   line-height: 1.4;
   display: inline;
   vertical-align: baseline;
@@ -334,9 +335,8 @@
   width: 100%;
   box-sizing: content-box;
 }
-.customLinkPrefix {
-  /* match .customLink */
-}
+
+
   
 @media (prefers-color-scheme: dark) {
   .dashboardBtn {
@@ -414,6 +414,6 @@
 @media (prefers-color-scheme: dark) {
   .edit.doneState {
     background: var(--foreground);
-    border: 1px solid rgba(0,0,0,0.09);
+    border: 1px solid rgba(0,0,0,0.03);
   }
 }
