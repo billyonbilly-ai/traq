@@ -237,7 +237,7 @@ export default function DashboardNew() {
                   </div>
                 </div>
               </>
-              <label className={styles.inputLabel} htmlFor="timezone">Redirects to</label>
+              <label className={styles.inputLabel} htmlFor="redirect">Redirects to</label>
               <div className={styles.timezoneBox}>
               <span className={styles.subTextBold}>{(() => {
                 if (!url) return '';
