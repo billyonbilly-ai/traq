@@ -96,6 +96,11 @@ export default function DashboardNew() {
     return tz.replace(/_/g, ' ');
   }
 
+  function handleCustomPathChange(e) {
+    // Allow only letters, numbers, hyphens, and underscores, and limit length
+    setCustomPath(e.target.value.replace(/[^a-zA-Z0-9-_]/g, '').slice(0, 20));
+  }
+
   function isValidUrl(value) {
     return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/.test(value.trim());
   }
@@ -105,7 +110,6 @@ export default function DashboardNew() {
     if (!editMode && step === 2 && customLink) {
       setCustomLink(base + customPath);
     }
-    // eslint-disable-next-line
   }, [editMode]);
 
   return (
@@ -172,9 +176,8 @@ export default function DashboardNew() {
               <div className={`${styles.cardTitle} ${styles.cardTitle2}`}>
                 Copy and share your custom link
                 </div>
-                              <span className={styles.stepLabel}>Custom link</span>
+                              <span className={styles.inputLabel}>Custom link</span>
 
-              {/* Custom link input and copy button, and edit button below */}
               <>
                 <div className={`${styles.domainInputWrap} ${styles.customLinkWrap}`}>
                   <span className={styles.customLinkPrefix} style={{ color: editMode ? 'var(--foreground)' : 'var(--primary)', fontWeight: 500, userSelect: 'none' }}>{base}</span>
@@ -186,7 +189,7 @@ export default function DashboardNew() {
                     readOnly={!editMode}
                     spellCheck={false}
                     style={{ color: editMode ? 'var(--foreground)' : 'var(--primary)', fontWeight: 500, background: 'transparent', border: 'none', outline: 'none', width: '100%' }}
-                    onChange={e => setCustomPath(e.target.value.replace(/\//g, '').slice(0, 20))}
+                    onChange={handleCustomPathChange}
                   />
                 </div>
                 <div className={styles.linkBtns}>

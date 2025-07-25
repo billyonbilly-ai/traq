@@ -1,8 +1,9 @@
 'use client';
 import styles from './page.module.scss';
 import { useSession} from 'next-auth/react';
-import Button from '../../components/Button';
+
 import DashboardNavbar from '../../components/DashboardNavbar';
+import LinkCard from '../../components/LinkCard';
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -14,8 +15,14 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboardPage}>
       <DashboardNavbar />
+      <div className={styles.header}>
+        <button className={styles.addUrlBtn} onClick={() => router.push('/dashboard/new')}>+ Add new URL</button>
+      </div>
       <div className={styles.dashboardMain}>
-        <Button onClick={() => router.push('/dashboard/new')}>Add new URL</Button>
+        <LinkCard />
+        <LinkCard />
+        <LinkCard />
+        <LinkCard />
       </div>
     </div>
   );

@@ -246,7 +246,6 @@
 }
 
 .card2 {
-  // min-height: 260px; 
   display: flex; 
   flex-direction: column;
 
@@ -254,7 +253,7 @@
 
 
   .customLinkWrap {
-    padding: 0 0.3rem 0 0.6rem;
+    padding: 0 0.3rem 0 1.3rem;
     margin-bottom: 0.5rem;
   }
 
@@ -314,6 +313,8 @@
   }
   .subTextBold {
     font-weight: 600;
+    font-size: 1.2rem;
+    color: #888;
   }
 
 .customLink, .customLinkPrefix {

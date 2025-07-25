@@ -3,7 +3,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.4rem 3.2rem 0.8rem 3.2rem;
+  padding: 2.4rem 10vw 4rem 10vw;
+
+  @media (max-width: 1200px) {
+    padding: 2.4rem 5vw 4rem 5vw;
+  }
+
+  @media (max-width: 640px) {
+    padding: 2.4rem 1.35rem 2rem 1.35rem;
+  }
   box-sizing: border-box;
 }
 .logo {
