@@ -3,12 +3,14 @@ import styles from './page.module.scss';
 import DashboardNavbar from '../../../components/DashboardNavbar';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTrackedLinks } from '../../context/TrackedLinksContext';
 
 export default function DashboardNew() {
   const [step, setStep] = useState(1);
   const [url, setUrl] = useState('');
   const [urlError, setUrlError] = useState('');
   const router = useRouter();
+  const { addTrackedLink } = useTrackedLinks();
 
   // Timezone and live clock logic
   const [timezone, setTimezone] = useState('');
@@ -172,7 +174,16 @@ export default function DashboardNew() {
               <button className={styles.addBtn} type="submit">Add URL</button>
             </form>
           ) : (
-            <div className={`${styles.card} ${styles.card2}`}>
+            <form className={`${styles.card} ${styles.card2}`} onSubmit={(e) => {
+              e.preventDefault();
+              if (editMode) return;
+              
+              // Add the tracked link
+              addTrackedLink(customLink, url);
+              
+              // Redirect to dashboard
+              router.push('/dashboard');
+            }}>
               <div className={`${styles.cardTitle} ${styles.cardTitle2}`}>
                 Copy and share your custom link
                 </div>
@@ -250,7 +261,7 @@ export default function DashboardNew() {
               </div>
              
                <button className={styles.addBtn + ' ' + (editMode ? styles.inactiveBtn : '')} type="submit" disabled={editMode}>Start Tracking</button>
-              </div>
+               </form>
           
           )}
         </div>

@@ -1,4 +1,5 @@
- import "./globals.scss";
+import React from 'react';
+import "./globals.scss";
   import ClientProvider from './context/ClientProvider';
 
   export const metadata = {

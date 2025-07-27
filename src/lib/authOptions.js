@@ -1,11 +1,10 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import clientPromise from "@/lib/mongodb";
-import { getUserByEmail, linkAccount, updateUser } from "@/lib/user-utils";
-import { compare } from "bcryptjs";
+import GoogleProvider from 'next-auth/providers/google';
+import EmailProvider from 'next-auth/providers/email';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { MongoDBAdapter } from '@auth/mongodb-adapter';
+import clientPromise from './mongodb';
+import { getUserByEmail, linkAccount, updateUser } from './user-utils';
+import { compare } from 'bcryptjs';
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -22,25 +21,21 @@ export const authOptions = {
       from: process.env.EMAIL_FROM,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         const user = await getUserByEmail(credentials.email);
-        console.log('CredentialsProvider authorize: user', user);
         if (!user || !user.password) return null;
         const isValid = await compare(credentials.password, user.password);
-        console.log('CredentialsProvider authorize: isValid', isValid);
         if (!isValid) return null;
-        const result = {
+        return {
           id: user._id.toString(),
           email: user.email,
           name: user.name,
         };
-        console.log('CredentialsProvider authorize: returning', result);
-        return result;
       },
     }),
   ],
@@ -54,20 +49,14 @@ export const authOptions = {
         await linkAccount(existingUser._id, account);
         user.name = existingUser.name;
         await updateUser(existingUser._id, { name: existingUser.name });
-        return true;
       }
       return true;
     },
     async session({ session, user }) {
-      console.log('Session callback: session', session, 'user', user);
-      if (user && user.name) session.user.name = user.name;
-      if (user && user.email) session.user.email = user.email;
-      if (user && user.id) session.user.id = user.id;
+      if (user?.name) session.user.name = user.name;
+      if (user?.email) session.user.email = user.email;
+      if (user?.id) session.user.id = user.id;
       return session;
     },
   },
 };
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
