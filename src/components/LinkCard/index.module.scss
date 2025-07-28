@@ -15,43 +15,85 @@
     gap: 0.8rem;
     padding: 2rem;
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 600;
-
-    .linkIconCircle {
-      width: 21px;
-      height: 21px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #888;
-      margin-right: 0.3rem;
-    }
 
 
         .cardRedirect {
       font-size: 1.2rem;
-      color: #888;
+      color: #999;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-left: 2.9rem;
 
-      .arrow {
-        font-size: 1.3rem;
-        border-radius: 50%;
-      }
+  
     }
   }
 
   &Bottom {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    // background-color: pink;
     
+.cardChart {
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+ 
+}
 
+.cardSummary {
+  font-size: 1.2rem;
+ display: flex;
+ align-items: center;
+ gap: 2rem;
 
+  .clickCount {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #999;
+
+    .counter {
+      color: var(--foreground);
+    }
+  }
+
+  .viewAnalytics {
+    display: flex;
+    gap: 0.5rem;
+    
+    cursor: pointer;
+    transition: color 0.5s ease;
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+  }
+}
+
+.copyIconWrapper {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copyIconWrapper:hover {
+  background-color: rgba(0,0,0,0.06);
+}
+@media (prefers-color-scheme: dark) {
+  .copyIconWrapper:hover {
+    background-color: rgba(255,255,255,0.12);
   }
 }
 

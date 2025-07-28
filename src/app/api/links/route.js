@@ -31,12 +31,14 @@ export async function POST(req) {
   try {
     const data = await req.json();
     const { customLink, redirectUrl } = data;
+    const slug = customLink.split('/').pop();
     if (!customLink || !redirectUrl) {
       return new Response(JSON.stringify({ error: 'Invalid payload' }), { status: 400 });
     }
     const client = await clientPromise;
     const db = client.db();
     const newDoc = {
+      slug,
       userEmail: session.user.email,
       customLink,
       redirectUrl,
