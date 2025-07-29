@@ -15,8 +15,19 @@ export default async function RedirectSlugPage({ params }) {
       notFound();
     }
 
-    // Increase click count if you want analytics (optional)
-    // await db.collection('links').updateOne({ _id: doc._id }, { $inc: { clicks: 1 } });
+    // Track visitor click with timestamp
+    await db.collection('links').updateOne(
+      { _id: doc._id }, 
+      { 
+        $inc: { clicks: 1 },
+        $push: { 
+          visits: { 
+            timestamp: new Date(),
+            ip: null // Could add IP tracking later if needed
+          }
+        }
+      }
+    );
 
     redirect(doc.redirectUrl);
 

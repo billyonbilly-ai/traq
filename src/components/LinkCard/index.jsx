@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import styles from './index.module.scss';
 
-export default function LinkCard({ customLink, redirectUrl }) {
+export default function LinkCard({ customLink, redirectUrl, clicks = 0 }) {
   // Helper function to split custom link into base and path
   const splitCustomLink = (link) => {
     if (!link) return { base: 'traq.site/', path: 'thegiftofdreamingtwo' };
@@ -30,6 +31,18 @@ export default function LinkCard({ customLink, redirectUrl }) {
     return cleanUrl;
   };
 
+    const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(customLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (e) {
+      console.error('Copy failed', e);
+    }
+  };
+
   const { base, path } = splitCustomLink(customLink);
   const truncatedRedirect = truncateRedirectUrl(redirectUrl);
 
@@ -38,14 +51,17 @@ export default function LinkCard({ customLink, redirectUrl }) {
       <div className={styles.cardTop}>
         <div className={styles.cardLink} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span><span className={styles.baseURL}>{base}</span><span className={styles.path}>{path}</span></span>
-          <div className={styles.copyIconWrapper} title="Copy" role="button" aria-label="Copy">
-            <svg className={styles.copyIcon} xmlns="http://www.w3.org/2000/svg" viewBox="17.8 6.16 64.41 87.69" width="14.5" height="14.5" fill="currentColor" aria-label="Copy icon">
-            
-            <path fillRule="evenodd" clipRule="evenodd" d="M64.378,15.621h10.595c3.981,0,7.233,3.259,7.233,7.233v63.758c0,3.981-3.26,7.233-7.233,7.233H25.027  c-3.98,0-7.232-3.259-7.232-7.233V22.854c0-3.981,3.259-7.233,7.232-7.233h10.594c0-3.377,1.48-2.776,5.938-2.776  c2.021-8.919,14.859-8.919,16.88,0C62.899,12.844,64.378,12.243,64.378,15.621L64.378,15.621z M34.479,73.122H65.52  c2.528,0,2.528-3.84,0-3.84H34.479C31.952,69.282,31.952,73.122,34.479,73.122L34.479,73.122z M34.479,59.473H65.52  c2.528,0,2.528-3.84,0-3.84H34.479C31.952,55.633,31.952,59.473,34.479,59.473L34.479,59.473z M34.479,45.824H65.52  c2.528,0,2.528-3.84,0-3.84H34.479C31.952,41.984,31.952,45.824,34.479,45.824L34.479,45.824z M35.622,19.461H25.027  c-1.882,0-3.393,1.541-3.393,3.393v63.758c0,1.875,1.537,3.393,3.393,3.393h49.945c1.881,0,3.393-1.542,3.393-3.393V22.854  c0-1.875-1.537-3.393-3.393-3.393H64.378c0,2.459,0.575,5.641-1.92,5.641H37.542C35.047,25.102,35.622,21.92,35.622,19.461  L35.622,19.461z M43.266,16.684h-3.804v4.578h21.077v-4.578c-2.512,0-5.724,0.584-5.724-1.92c0-4.276-5.194-6.429-8.219-3.404  c-0.871,0.871-1.41,2.075-1.41,3.404C45.186,15.824,44.326,16.684,43.266,16.684z"/>
+          <div className={styles.copyIconWrapper} title="Copy" role="button" aria-label="Copy" onClick={handleCopy}>
+            {copied ? (
+              <svg className={styles.copyIcon} xmlns="http://www.w3.org/2000/svg" viewBox="9.7 21.1 80.5 60.9" width="15" height="11" fill="currentColor" aria-label="Copied">
+                <path d="M35.9,75.5c0.9,0.9,2.2,1.5,3.5,1.5s2.6-0.5,3.5-1.5l40.8-40.8c2-2,2-5.1,0-7.1c-2-2-5.1-2-7.1,0L39.4,64.8L23.3,48.8   c-2-2-5.1-2-7.1,0c-2,2-2,5.1,0,7.1L35.9,75.5z"/>
+              </svg>
+            ) : (
+              <svg className={styles.copyIcon} xmlns="http://www.w3.org/2000/svg" viewBox="9.062702178955078 0 81.87520599365234 100.62470245361328" width="15" height="18.5" fill="currentColor" aria-label="Copy icon" vectorEffect="non-scaling-stroke">
+                <path d="m79.547 15.625h-7.7578c-0.46094-2.6562-2.7812-4.6875-5.5703-4.6875h-7.375c-1.2969-3.6406-4.7734-6.25-8.8438-6.25s-7.5469 2.6094-8.8359 6.25h-7.375c-2.7891 0-5.1094 2.0312-5.5703 4.6875h-7.7578c-3.5312 0-6.3984 2.8672-6.3984 6.3906v66.906c0 3.5234 2.8672 6.3906 6.3906 6.3906h59.094c3.5234 0 6.3906-2.8672 6.3906-6.3906v-66.906c0-3.5234-2.8672-6.3906-6.3906-6.3906zm-45.172 1.5625h9.375c1.7266 0 3.125-1.3984 3.125-3.125s1.3984-3.125 3.125-3.125 3.125 1.3984 3.125 3.125 1.3984 3.125 3.125 3.125h9.375v6.25h-31.25zm45.312 71.734c0 0.078125-0.0625 0.14062-0.14062 0.14062h-59.094c-0.078125 0-0.14062-0.0625-0.14062-0.14062v-66.906c0-0.078125 0.0625-0.14062 0.14062-0.14062h7.6719v2.1484c0 3.125 2.5391 5.6641 5.6641 5.6641h32.43c3.125 0 5.6641-2.5391 5.6641-5.6641v-2.1484h7.6719c0.078124 0 0.14062 0.0625 0.14062 0.14062v66.906zm-6.25-12.359c0 1.7266-1.3984 3.125-3.125 3.125h-28.273c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h28.273c1.7266 0 3.125 1.3984 3.125 3.125zm0-17.188c0 1.7266-1.3984 3.125-3.125 3.125h-28.273c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h28.273c1.7266 0 3.125 1.3984 3.125 3.125zm0-17.188c0 1.7266-1.3984 3.125-3.125 3.125h-28.273c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h28.273c1.7266 0 3.125 1.3984 3.125 3.125zm-39.062 34.375c0 1.7266-1.3984 3.125-3.125 3.125h-1.5625c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h1.5625c1.7266 0 3.125 1.3984 3.125 3.125zm0-17.188c0 1.7266-1.3984 3.125-3.125 3.125h-1.5625c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h1.5625c1.7266 0 3.125 1.3984 3.125 3.125zm0-17.188c0 1.7266-1.3984 3.125-3.125 3.125h-1.5625c-1.7266 0-3.125-1.3984-3.125-3.125s1.3984-3.125 3.125-3.125h1.5625c1.7266 0 3.125 1.3984 3.125 3.125z"/>
             </svg>
-          
-          
-        </div>
+            )} 
+          </div>
       </div>
 
       <div className={styles.cardRedirect}>
@@ -59,21 +75,15 @@ export default function LinkCard({ customLink, redirectUrl }) {
       </div>
       
       <div className={styles.cardBottom}>
-      
-        <div className={styles.cardChart}>
-        chart goes in here
-      </div>
-         <div className={styles.cardSummary}>
-           <div className={styles.clickCount}>
-           
-              <span className={styles.counter}>
-                0
-              </span>
-               <span>
-                visitors  
-              </span>
-            
-      </div>
+        <div className={styles.cardChart}></div>
+
+        <div className={styles.cardSummary}>
+          <div className={styles.clickCount}>
+            <span className={styles.counter}>{clicks}</span>
+            <span>visitors</span>
+          </div>
+
+
        <div className={styles.viewAnalytics}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="13.06 17.76 73.88 64.49" width="14" height="14" fill="currentColor" aria-label="Analytics icon">
               <path d="m28.664 46.289c-3.4258-0.92578-7.0469-0.92578-10.469 0-2.6406 0.71094-4.5391 3.0234-4.7266 5.75-0.53906 7.8828-0.53906 15.879 0 23.758 0.1875 2.7266 2.0859 5.0391 4.7266 5.75 1.7109 0.46094 3.4766 0.69141 5.2344 0.69141 1.7617 0 3.5234-0.23047 5.2344-0.69141 2.6406-0.71094 4.5391-3.0234 4.7266-5.75 0.53906-7.8828 0.53906-15.879 0-23.758-0.1875-2.7266-2.0859-5.0352-4.7266-5.75zm-0.14453 29.18c-0.046875 0.64844-0.49609 1.2031-1.125 1.3711-2.5938 0.69922-5.3359 0.69922-7.9297 0-0.62891-0.17188-1.082-0.71875-1.125-1.3711-0.52344-7.6602-0.52344-15.43 0-23.094 0.046875-0.64844 0.49609-1.2031 1.125-1.3711 2.5938-0.69922 5.3359-0.69922 7.9297 0 0.62891 0.17188 1.082 0.71875 1.125 1.3711 0.52734 7.6641 0.52734 15.43 0 23.094z"/>
@@ -82,7 +92,6 @@ export default function LinkCard({ customLink, redirectUrl }) {
             </svg>
             <span>View analytics</span>
       </div>
-        
       </div>
       </div>
     </div>

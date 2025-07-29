@@ -34,7 +34,7 @@ export function TrackedLinksProvider({ children }) {
   const { data: session } = useSession();
   React.useEffect(() => {
     if (!session) return;
-    (async () => {
+    const fetchLinks = async () => {
       try {
         const res = await fetch('/api/links', { credentials: 'include' });
         if (res.ok) {
@@ -44,8 +44,15 @@ export function TrackedLinksProvider({ children }) {
       } catch (e) {
         console.error('Failed to load links', e);
       }
-    })();
+    };
+    // initial fetch
+    fetchLinks();
+    // poll every 10 seconds
+    const id = setInterval(fetchLinks, 10000);
+    return () => clearInterval(id);
   }, [session]);
+
+
 
   return (
     <TrackedLinksContext.Provider value={{ trackedLinks, addTrackedLink, removeTrackedLink }}>

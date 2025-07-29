@@ -38,6 +38,8 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db();
     const newDoc = {
+      clicks: 0,
+      visits: [],
       slug,
       userEmail: session.user.email,
       customLink,
