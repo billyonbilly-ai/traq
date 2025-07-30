@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { LineChart, Line, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import styles from './index.module.scss';
 
-export default function LinkCard({ customLink, redirectUrl, clicks = 0 }) {
+function CustomTooltip({ active, payload, label }) {
+  if (active && payload && payload.length) {
+    return (
+      <div style={{ background: 'var(--accent)', padding: '4px 8px', borderRadius: 4, fontSize: 12, color: 'var(--foreground)' }}>
+        <div>{label}</div>
+        <div style={{ fontWeight: 600 }}>{payload[0].value} visits</div>
+      </div>
+    );
+  }
+  return null;
+}
+
+export default function LinkCard({ customLink, redirectUrl, clicks = 0, visits = [] }) {
   // Helper function to split custom link into base and path
   const splitCustomLink = (link) => {
-    if (!link) return { base: 'traq.site/', path: 'thegiftofdreamingtwo' };
+    if (!link) return { base: 'traq.site/', path: 'placeholder' };
     
     // Remove protocol if present
     const cleanLink = link.replace(/^https?:\/\//, '');
@@ -20,13 +33,38 @@ export default function LinkCard({ customLink, redirectUrl, clicks = 0 }) {
     };
   };
 
+  // Prepare chart data (visits per day)
+  const chartData = useMemo(() => {
+    if (!visits || visits.length === 0) return [];
+
+    const counts = {};
+    visits.forEach(v => {
+      const ts = v.timestamp || v; // v could be object or ISO string
+      const dayKey = new Date(ts).toISOString().slice(0, 10); // YYYY-MM-DD
+      counts[dayKey] = (counts[dayKey] || 0) + 1;
+    });
+
+    const todayKey = new Date().toISOString().slice(0, 10);
+    const formatLabel = (key) => {
+      if (key === todayKey) return 'Today';
+      const d = new Date(key);
+      return d.toLocaleString('en-US', { month: 'short', day: 'numeric' }); // e.g., Aug 3
+    };
+
+    const data = Object.entries(counts)
+      .sort(([a], [b]) => new Date(a) - new Date(b))
+      .map(([k, count]) => ({ date: formatLabel(k), count }));
+    // Keep only last 56 days (≈8 weeks)
+    return data.slice(-56);
+  }, [visits]);
+
   // Helper function to truncate redirect URL
   const truncateRedirectUrl = (url) => {
     if (!url) return 'www.unicode.org/charts/name...';
     
     const cleanUrl = url.replace(/^https?:\/\//, '');
-    if (cleanUrl.length > 31) {
-      return cleanUrl.slice(0, 31) + '...';
+    if (cleanUrl.length > 40) {
+      return cleanUrl.slice(0, 40) + '...';
     }
     return cleanUrl;
   };
@@ -75,7 +113,27 @@ export default function LinkCard({ customLink, redirectUrl, clicks = 0 }) {
       </div>
       
       <div className={styles.cardBottom}>
-        <div className={styles.cardChart}></div>
+        <div className={styles.cardChart}>
+          {(chartData.length > 0) ? (
+            <ResponsiveContainer width="100%" height={60}>
+              <LineChart data={chartData} margin={{ top: 5, right: 0, left: 0, bottom: 2 }}>
+                <XAxis dataKey="date" hide tick={{ fontSize: 10 }} />
+                <YAxis hide domain={[0, 'dataMax']} />
+                <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />
+                <Area type="monotone" dataKey="count" stroke="none" fill="#a855f7" fillOpacity={0.2} />
+                <Line type="monotone" dataKey="count" stroke="#a855f7" strokeWidth={2} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          ) : (
+            <ResponsiveContainer width="100%" height={60}>
+              <LineChart data={[{ date: ' ', count: 0 }, { date: ' ', count: 0 }]} margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
+                <XAxis dataKey="date" hide />
+                <YAxis hide domain={[0, 1]} />
+                <Line type="monotone" dataKey="count" stroke="#a855f7" strokeWidth={2} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
+        </div>
 
         <div className={styles.cardSummary}>
           <div className={styles.clickCount}>

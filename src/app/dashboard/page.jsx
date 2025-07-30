@@ -27,6 +27,7 @@ export default function Dashboard() {
             customLink={link.customLink}
             redirectUrl={link.redirectUrl}
             clicks={link.clicks ?? 0}
+            visits={link.visits ?? []}
           />
         ))}
       </div>
