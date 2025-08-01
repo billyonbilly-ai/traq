@@ -1,0 +1,12 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--foreground);
+
+  svg {
+    flex-shrink: 0;
+  }
+}

@@ -1,13 +1,13 @@
 import styles from './index.module.scss';
-import { signOut } from 'next-auth/react';
+import Logo from '../Logo';
+import ProfileMenu from '../ProfileMenu';
+
 
 export default function DashboardNavbar() {
   return (
     <div className={styles.navbar}>
-      <div className={styles.logo}>Traq.</div>
-      <button className={styles.logoutButton} onClick={() => signOut({ callbackUrl: '/' })}>
-        Log out
-      </button>
+      <Logo />
+      <ProfileMenu />
     </div>
   );
 } 

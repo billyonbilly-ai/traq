@@ -24,6 +24,7 @@ export default function Dashboard() {
         {trackedLinks.map(link => (
           <LinkCard 
             key={link._id ?? link.id}
+            id={link._id ?? link.id}
             customLink={link.customLink}
             redirectUrl={link.redirectUrl}
             clicks={link.clicks ?? 0}

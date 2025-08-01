@@ -14,7 +14,9 @@ function CustomTooltip({ active, payload, label }) {
   return null;
 }
 
-export default function LinkCard({ customLink, redirectUrl, clicks = 0, visits = [] }) {
+import Link from 'next/link';
+
+export default function LinkCard({ id, customLink, redirectUrl, clicks = 0, visits = [] }) {
   // Helper function to split custom link into base and path
   const splitCustomLink = (link) => {
     if (!link) return { base: 'traq.site/', path: 'placeholder' };
@@ -63,8 +65,8 @@ export default function LinkCard({ customLink, redirectUrl, clicks = 0, visits =
     if (!url) return 'www.unicode.org/charts/name...';
     
     const cleanUrl = url.replace(/^https?:\/\//, '');
-    if (cleanUrl.length > 40) {
-      return cleanUrl.slice(0, 40) + '...';
+    if (cleanUrl.length > 37) {
+      return cleanUrl.slice(0, 37) + '...';
     }
     return cleanUrl;
   };
@@ -119,7 +121,7 @@ export default function LinkCard({ customLink, redirectUrl, clicks = 0, visits =
               <LineChart data={chartData} margin={{ top: 5, right: 0, left: 0, bottom: 2 }}>
                 <XAxis dataKey="date" hide tick={{ fontSize: 10 }} />
                 <YAxis hide domain={[0, 'dataMax']} />
-                <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />
+                <Tooltip content={<CustomTooltip/> } cursor={false} />
                 <Area type="monotone" dataKey="count" stroke="none" fill="#a855f7" fillOpacity={0.2} />
                 <Line type="monotone" dataKey="count" stroke="#a855f7" strokeWidth={2} dot={false} />
               </LineChart>
@@ -142,14 +144,14 @@ export default function LinkCard({ customLink, redirectUrl, clicks = 0, visits =
           </div>
 
 
-       <div className={styles.viewAnalytics}>
+       <Link href={id ? `/dashboard/${id}` : '#'} className={styles.viewAnalytics}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="13.06 17.76 73.88 64.49" width="14" height="14" fill="currentColor" aria-label="Analytics icon">
               <path d="m28.664 46.289c-3.4258-0.92578-7.0469-0.92578-10.469 0-2.6406 0.71094-4.5391 3.0234-4.7266 5.75-0.53906 7.8828-0.53906 15.879 0 23.758 0.1875 2.7266 2.0859 5.0391 4.7266 5.75 1.7109 0.46094 3.4766 0.69141 5.2344 0.69141 1.7617 0 3.5234-0.23047 5.2344-0.69141 2.6406-0.71094 4.5391-3.0234 4.7266-5.75 0.53906-7.8828 0.53906-15.879 0-23.758-0.1875-2.7266-2.0859-5.0352-4.7266-5.75zm-0.14453 29.18c-0.046875 0.64844-0.49609 1.2031-1.125 1.3711-2.5938 0.69922-5.3359 0.69922-7.9297 0-0.62891-0.17188-1.082-0.71875-1.125-1.3711-0.52344-7.6602-0.52344-15.43 0-23.094 0.046875-0.64844 0.49609-1.2031 1.125-1.3711 2.5938-0.69922 5.3359-0.69922 7.9297 0 0.62891 0.17188 1.082 0.71875 1.125 1.3711 0.52734 7.6641 0.52734 15.43 0 23.094z"/>
               <path d="m55.977 19.18c-3.7383-1.8984-8.1992-1.8984-11.938 0-2.3125 1.1758-3.8125 3.5195-3.9062 6.1094-0.59766 16.395-0.59766 33.02 0 49.414 0.09375 2.5938 1.5938 4.9375 3.9062 6.1094 1.8672 0.94922 3.918 1.4219 5.9688 1.4219 2.0508 0 4.1016-0.47656 5.9688-1.4219 2.3125-1.1758 3.8125-3.5195 3.9062-6.1094 0.59766-16.395 0.59766-33.02 0-49.414-0.09375-2.5898-1.5898-4.9297-3.9062-6.1094zm-0.96875 55.352c-0.03125 0.82031-0.50391 1.5625-1.2344 1.9375-2.3516 1.1953-5.1641 1.1953-7.5156 0-0.73437-0.375-1.207-1.1133-1.2344-1.9375-0.59375-16.277-0.59375-32.781 0-49.059 0.03125-0.82031 0.50391-1.5625 1.2344-1.9375 2.3516-1.1953 5.1641-1.1953 7.5156 0 0.73437 0.375 1.207 1.1133 1.2344 1.9375 0.58984 16.277 0.58984 32.777 0 49.059z"/>
               <path d="m81.883 32.82c-3.4102-1.3164-7.1641-1.3164-10.578 0-2.6797 1.0312-4.4961 3.5547-4.6328 6.418-0.56641 11.812-0.56641 23.789 0 35.602 0.13672 2.8672 1.9531 5.3867 4.6328 6.418 1.7031 0.65625 3.4961 0.98438 5.2891 0.98438s3.5859-0.32813 5.2891-0.98438c2.6797-1.0312 4.4961-3.5547 4.6328-6.418 0.56641-11.812 0.56641-23.789 0-35.602-0.13672-2.8633-1.9531-5.3867-4.6328-6.418zm-0.24219 41.789c-0.046875 0.9375-0.64062 1.7578-1.5156 2.0977-2.2773 0.87891-4.7812 0.87891-7.0625 0-0.875-0.33594-1.4688-1.1641-1.5156-2.0977-0.55859-11.656-0.55859-23.477 0-35.133 0.046875-0.9375 0.64062-1.7578 1.5156-2.0977 1.1406-0.4375 2.3359-0.65625 3.5312-0.65625s2.3906 0.21875 3.5312 0.65625c0.875 0.33594 1.4688 1.1641 1.5156 2.0977 0.55469 11.656 0.55469 23.477 0 35.133z"/>
             </svg>
             <span>View analytics</span>
-      </div>
+       </Link>
       </div>
       </div>
     </div>

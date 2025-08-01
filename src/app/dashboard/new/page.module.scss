@@ -9,7 +9,7 @@
 
 .addNewContainer {
   max-width: 480px;
-  margin: 48px auto 0 auto;
+  margin: 10px auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@
 
 @media(max-width: 600px) {
     .addNewContainer {
-      margin: 48px 0;
+      margin: 10px 0;
     }
 
 }
